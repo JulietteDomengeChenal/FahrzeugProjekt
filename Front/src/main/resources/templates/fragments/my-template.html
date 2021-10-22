@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Template</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+    <div>
+        <ul th:fragment="my-navBar">
+            <li><a th:href="@{/accueil}">Accueil</a></li>
+            <li><a th:href="@{/recherche}">Recherche</a></li>
+<!--            <li><a th:href="@{/about}">About</a></li>-->
+        </ul>
+    </div>
+
+
+    <div>
+
+    </div>
+
+
+</body>
+</html>
