@@ -35,13 +35,13 @@ public class ReservierungController {
     @PutMapping(value="/Reservierung/{id}")
     public Reservierung editReservierung(@RequestBody Reservierung reservierung, @PathVariable int id){
         Reservierung editReservierung = reservierungRepository.findById(id);
-            reservierung.setFahrzeugType(editReservierung.getFahrzeugType());
-            reservierung.setFahrzeugId(editReservierung.getFahrzeugId());
-            reservierung.setBenutzerId(editReservierung.getBenutzerId());
-            reservierung.setDuree(editReservierung.getDuree());
-            reservierung.setDateDebut(editReservierung.getDateDebut());
-            reservierung.setPrix(editReservierung.getPrix());
-        return reservierungRepository.save(reservierung);
+            editReservierung.setFahrzeugType(reservierung.getFahrzeugType());
+            editReservierung.setFahrzeugId(reservierung.getFahrzeugId());
+            editReservierung.setBenutzerId(reservierung.getBenutzerId());
+            editReservierung.setDuree(reservierung.getDuree());
+            editReservierung.setDateDebut(reservierung.getDateDebut());
+            editReservierung.setPrix(reservierung.getPrix());
+        return reservierungRepository.save(editReservierung);
     }
 
 //-------------------------------------------Delete une réservation-----------------------------------------------------

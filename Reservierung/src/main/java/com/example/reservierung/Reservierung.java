@@ -6,22 +6,28 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-@Table(name = "Reservierung")
+@Table(name = "reservierung")
 public class Reservierung {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
     @Column(name = "benutzerId")
     private int benutzerId;
+
     @Column(name = "fahrzeugId")
     private int fahrzeugId;
+
     @Column(name = "fahrzeugType")
     private String fahrzeugType;
+
     @Column(name = "dateDebut")
     private Date dateDebut;
+
     @Column(name = "duree")
     private int duree;
+
     @Column(name = "prix")
     private int prix;
 
@@ -51,7 +57,6 @@ public class Reservierung {
     }
 
 //---------------------------------GETTER----------------------------------------//
-
     public int getId() {
         return id;
     }
@@ -75,7 +80,6 @@ public class Reservierung {
     }
 
 //---------------------------------SETTER----------------------------------------//
-
     public void setId(int id) {
         this.id = id;
     }
