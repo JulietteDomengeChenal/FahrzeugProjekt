@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
+
+
+<div class="bodyDiv">
+
+    <h1>Bienvenue les men in black</h1>
+    <h2>Fahrzeug Projekt </h2>
+<!--    <h2 th:utext="${message}">..!..</h2>-->
+
+    <a href="recherche">Faire une nouvelle réservation</a>
+    <br/><br/>
+    <div>
+        <table style="border: 1px solid #333">
+            <tr>
+                <th>Id</th>
+                <th>benutzerId</th>
+                <th>fahrzeugId</th>
+                <th>fahrzeugType</th>
+                <th>dateDebut</th>
+                <th>duree</th>
+                <th>prix</th>
+            </tr>
+            <tr th:each ="reservierung : ${reservierungs}">
+                <td th:utext="${reservierung.id}">...</td>
+                <td th:utext="${reservierung.benutzerId}">...</td>
+                <td th:utext="${reservierung.fahrzeugId}">...</td>
+                <td th:utext="${reservierung.fahrzeugType}">...</td>
+                <td th:utext="${reservierung.dateDebut}">...</td>
+                <td th:utext="${reservierung.duree}">...</td>
+                <td th:utext="${reservierung.prix}">...</td>
+                <!--                <td><a th:href="@{/editPerson} +'/' + ${reservierung.id}" > Edit</a></td>-->
+                <!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
