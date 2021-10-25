@@ -16,13 +16,18 @@ public class FahrzeugController {
     private FahrzeugRepository fahrzeugRepository;
 
 
-    @RequestMapping(value="/Fahrzeug", method = RequestMethod.GET)
-    public List<Fahrzeug> fahrzeugList(){
+    @RequestMapping(value = "/Fahrzeug", method = RequestMethod.GET)
+    public List<Fahrzeug> fahrzeugList() {
         return (List<Fahrzeug>) fahrzeugRepository.findAll();
     }
 
-    @GetMapping(value="/Fahrzeug/{id}")
-    public Optional<Fahrzeug> afficherFahrzeugId(@PathVariable int id){
-       return fahrzeugRepository.findById(id);
+    @GetMapping(value = "/Fahrzeug/{id}")
+    public Optional<Fahrzeug> afficherFahrzeugId(@PathVariable int id) {
+        return fahrzeugRepository.findById(id);
+    }
+
+    @PostMapping(value = "/Fahrzeug")
+    public void ajouterFahrzeug(@RequestBody Fahrzeug fahrzeug){
+        fahrzeugRepository.save(fahrzeug);
     }
 }
