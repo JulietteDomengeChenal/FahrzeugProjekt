@@ -4,41 +4,41 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Fahrzeug")
+@Table(name = "Fahrzeug")
 public class Fahrzeug {
 
     @Id
     @GeneratedValue
     private int id;
 
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
 
-    @Column(name="immatriculation")
+    @Column(name = "immatriculation")
     private String immatriculation;
 
-    @Column(name="marque")
+    @Column(name = "marque")
     private String marque;
 
-    @Column(name="modele")
+    @Column(name = "modele")
     private String modele;
 
-    @Column(name="couleur")
+    @Column(name = "couleur")
     private String couleur;
 
-    @Column(name="prixReservation")
+    @Column(name = "prixReservation")
     private int prixReservation;
 
-    @Column(name="tarifKm")
-    private int tarifKm ;
+    @Column(name = "tarifKm")
+    private int tarifKm;
 
-    @Column(name="chevauxFiscaux")
+    @Column(name = "chevauxFiscaux")
     private int chevauxFiscaux;
 
-    @Column(name="cylindree")
+    @Column(name = "cylindree")
     private int cylindree;
 
-    @Column(name="volumeChargement")
+    @Column(name = "volumeChargement")
     private int volumeChargement;
 
     public Fahrzeug() {

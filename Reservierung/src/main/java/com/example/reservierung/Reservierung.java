@@ -1,6 +1,7 @@
 package com.example.reservierung;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 public class Reservierung {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "benutzerId")
@@ -56,48 +57,60 @@ public class Reservierung {
         this.prix = prix;
     }
 
-//---------------------------------GETTER----------------------------------------//
+    //---------------------------------GETTER----------------------------------------//
     public int getId() {
         return id;
     }
+
     public int getBenutzerId() {
         return benutzerId;
     }
+
     public int getFahrzeugId() {
         return fahrzeugId;
     }
+
     public String getFahrzeugType() {
         return fahrzeugType;
     }
+
     public Date getDateDebut() {
         return dateDebut;
     }
+
     public int getDuree() {
         return duree;
     }
+
     public int getPrix() {
         return prix;
     }
 
-//---------------------------------SETTER----------------------------------------//
+    //---------------------------------SETTER----------------------------------------//
     public void setId(int id) {
         this.id = id;
     }
+
     public void setBenutzerId(int benutzerId) {
         this.benutzerId = benutzerId;
     }
+
     public void setFahrzeugId(int fahrzeugId) {
         this.fahrzeugId = fahrzeugId;
     }
+
     public void setFahrzeugType(String fahrzeugType) {
         this.fahrzeugType = fahrzeugType;
     }
+
     public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
+
     public void setDuree(int duree) {
         this.duree = duree;
     }
+
     public void setPrix(int prix) {
         this.prix = prix;
     }
