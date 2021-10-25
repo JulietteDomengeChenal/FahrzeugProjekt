@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste Fahrzeg</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
+
+
+<div class="bodyDiv">
+
+    <h1>Liste Fahrzeug</h1>
+
+    <div>
+        <table style="border: 1px solid #333">
+            <tr>
+                <th>Id</th>
+                <th>benutzerId</th>
+                <th>fahrzeugId</th>
+                <th>fahrzeugType</th>
+                <th>dateDebut</th>
+                <th>duree</th>
+                <th>prix</th>
+            </tr>
+            <tr th:each ="fahrzeug : ${fahrzeugs}">
+                <td th:utext="${fahrzeug.id}">...</td>
+                <td th:utext="${fahrzeug.type}">...</td>
+                <td th:utext="${fahrzeug.immatriculation}">...</td>
+                <td th:utext="${fahrzeug.marque}">...</td>
+                <td th:utext="${fahrzeug.modele }">...</td>
+                <td th:utext="${fahrzeug.couleur}">...</td>
+                <td th:utext="${fahrzeug.prixReservation}">...</td>
+                <!--                <td><a th:href="@{/editPerson} +'/' + ${reservierung.id}" > Edit</a></td>-->
+                <!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
