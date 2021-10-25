@@ -14,18 +14,24 @@
 
     <h1>Liste Fahrzeug</h1>
 
+    <h2 th:utext = "${reservierungForm.nombreKm}">...</h2>
+
     <div>
         <table style="border: 1px solid #333">
             <tr>
                 <th>Id</th>
-                <th>benutzerId</th>
-                <th>fahrzeugId</th>
-                <th>fahrzeugType</th>
-                <th>dateDebut</th>
-                <th>duree</th>
-                <th>prix</th>
+                <th>Type</th>
+                <th>Immatriculation</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Couleur</th>
+                <th>prix de Réservation</th>
+                <th>tarif Km</th>
+                <th>Cylindree</th>
+                <th>Volume Chargement</th>
+                <th>/</th>
             </tr>
-            <tr th:each ="fahrzeug : ${fahrzeugs}">
+            <tr th:each ="fahrzeug : ${selectedFahrzeug}">
                 <td th:utext="${fahrzeug.id}">...</td>
                 <td th:utext="${fahrzeug.type}">...</td>
                 <td th:utext="${fahrzeug.immatriculation}">...</td>
@@ -33,14 +39,16 @@
                 <td th:utext="${fahrzeug.modele }">...</td>
                 <td th:utext="${fahrzeug.couleur}">...</td>
                 <td th:utext="${fahrzeug.prixReservation}">...</td>
-                <!--                <td><a th:href="@{/editPerson} +'/' + ${reservierung.id}" > Edit</a></td>-->
-                <!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
+                <td th:utext="${fahrzeug.tarifKm}">...</td>
+                <td th:utext="${fahrzeug.cylindree}">...</td>
+                <td th:utext="${fahrzeug.volumeChargement}">...</td>
+                <td><a th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > Select</a></td>
+<!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
             </tr>
         </table>
     </div>
 
 </div>
-
 
 </body>
 </html>

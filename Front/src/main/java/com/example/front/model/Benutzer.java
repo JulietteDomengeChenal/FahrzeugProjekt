@@ -1,79 +1,60 @@
-package com.benutzer.benutzer.model;
+package com.example.front.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
-@Entity
-@Table(name= "Benutzer")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Benutzer {
 
-    @Id
-    @GeneratedValue
     private int id;
-
-    @Column(name = "nom")
     private String nom;
-
-    @Column(name = "prenom")
     private String prenom;
-
-    @Column(name = "dateNaissance")
     private Date dateNaissance;
-
-    @Column(name = "numeroPermis")
     private int numeroPermis;
-
-    @Column(name = "anneeObtention")
     private int anneeObtention;
 
     public Benutzer() {
     }
 
+    //---------------------------------GETTER----------------------------------------//
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNom() {
         return nom;
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public String getPrenom() {
         return prenom;
     }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
     public Date getDateNaissance() {
         return dateNaissance;
     }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
     public int getNumeroPermis() {
         return numeroPermis;
     }
-
-    public void setNumeroPermis(int numeroPermis) {
-        this.numeroPermis = numeroPermis;
-    }
-
     public int getAnneeObtention() {
         return anneeObtention;
     }
 
+    //---------------------------------SETTER----------------------------------------//
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+    public void setNumeroPermis(int numeroPermis) {
+        this.numeroPermis = numeroPermis;
+    }
     public void setAnneeObtention(int anneeObtention) {
         this.anneeObtention = anneeObtention;
     }
+
 }

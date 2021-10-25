@@ -24,7 +24,7 @@ public class Reservierung {
     private String fahrzeugType;
 
     @Column(name = "dateDebut")
-    private Date dateDebut;
+    private int dateDebut;
 
     @Column(name = "duree")
     private int duree;
@@ -48,7 +48,7 @@ public class Reservierung {
     public Reservierung() {
     }
 
-    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, int duree, int prix) {
+    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, int dateDebut, int duree, int prix) {
         this.benutzerId = benutzerId;
         this.fahrzeugId = fahrzeugId;
         this.fahrzeugType = fahrzeugType;
@@ -74,7 +74,7 @@ public class Reservierung {
         return fahrzeugType;
     }
 
-    public Date getDateDebut() {
+    public int getDateDebut() {
         return dateDebut;
     }
 
@@ -103,7 +103,7 @@ public class Reservierung {
         this.fahrzeugType = fahrzeugType;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(int dateDebut) {
         this.dateDebut = dateDebut;
     }
 

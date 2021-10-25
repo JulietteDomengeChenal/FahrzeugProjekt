@@ -1,32 +1,17 @@
-package com.benutzer.benutzer.model;
+package com.example.front.form;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name= "Benutzer")
-public class Benutzer {
+public class BenutzerForm {
 
-    @Id
-    @GeneratedValue
     private int id;
-
-    @Column(name = "nom")
     private String nom;
-
-    @Column(name = "prenom")
     private String prenom;
-
-    @Column(name = "dateNaissance")
     private Date dateNaissance;
-
-    @Column(name = "numeroPermis")
     private int numeroPermis;
-
-    @Column(name = "anneeObtention")
     private int anneeObtention;
 
-    public Benutzer() {
+    public BenutzerForm() {
     }
 
     public int getId() {

@@ -1,6 +1,7 @@
 package com.example.front.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -11,7 +12,8 @@ public class Reservierung {
     private int benutzerId;
     private int fahrzeugId;
     private String fahrzeugType;
-    private Date dateDebut;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private int dateDebut;
     private int duree;
     private int prix;
 
@@ -30,7 +32,7 @@ public class Reservierung {
     public Reservierung() {
     }
 
-    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, int duree, int prix) {
+    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, int dateDebut, int duree, int prix) {
         this.benutzerId = benutzerId;
         this.fahrzeugId = fahrzeugId;
         this.fahrzeugType = fahrzeugType;
@@ -52,7 +54,7 @@ public class Reservierung {
     public String getFahrzeugType() {
         return fahrzeugType;
     }
-    public Date getDateDebut() {
+    public int getDateDebut() {
         return dateDebut;
     }
     public int getDuree() {
@@ -75,7 +77,7 @@ public class Reservierung {
     public void setFahrzeugType(String fahrzeugType) {
         this.fahrzeugType = fahrzeugType;
     }
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(int dateDebut) {
         this.dateDebut = dateDebut;
     }
     public void setDuree(int duree) {

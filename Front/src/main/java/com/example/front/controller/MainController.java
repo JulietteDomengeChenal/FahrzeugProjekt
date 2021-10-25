@@ -12,12 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class MainController {
@@ -26,9 +29,11 @@ public class MainController {
     HttpHeaders headers = new HttpHeaders();
     private List<Reservierung> reservierungs;
     private List<Fahrzeug> fahrzeugs;
+    private ReservierungForm currentReservierungForm = new ReservierungForm();
 
     String urlReservierung = "http://localhost:8087";
     String urlFahrzeug = "http://localhost:8082";
+    String urlBenutzer = "http://localhost:8088";
 
     // Injectez (inject) via application.properties.
     @Value("${welcome.message}")
@@ -46,42 +51,63 @@ public class MainController {
         return "accueil";
     }
 
+//----------------Afficher le formulaire--------------------------------------------------------------------------------
     @RequestMapping(value = { "/recherche" }, method = RequestMethod.GET)
-    public String goReservierung(Model model) {
+    public String showFormulaire(Model model){
         ReservierungForm reservierungForm = new ReservierungForm();
         model.addAttribute("reservierungForm", reservierungForm);
         return "recherche";
     }
 
-//----------------Tableau-liste des véhicules /dispos/------------------------------------------------------------------
-    @RequestMapping(value = { "/listeFahrzeug" }, method = RequestMethod.GET)
-    public String findAllFahrzeug(Model model) {
-        assert restTemplate != null;
-        fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", List.class );
-        model.addAttribute("fahrzeugs", fahrzeugs);
+//----------------Enregistrer le formulaire-----------------------------------------------------------------------------
+    @RequestMapping(value = { "/recherche" }, method = RequestMethod.POST)
+    public String findAllFahrzeug(Model model, @ModelAttribute("reservierungForm") ReservierungForm reservierungForm) {
+        Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
+        Reservierung[] reservierungs = restTemplate.getForObject( urlReservierung + "/ListeReservierung", Reservierung[].class );
+        currentReservierungForm = reservierungForm;
+
+        List<Fahrzeug> selectedFahrzeug = new ArrayList<>();
+
+        for (Fahrzeug fahrzeug : fahrzeugs) {
+            if (reservierungForm.getFahrzeugType().equals(fahrzeug.getType())){
+                selectedFahrzeug.add(fahrzeug);
+            }
+            for (Reservierung reservierung : reservierungs){
+                if(reservierung.getFahrzeugId() == fahrzeug.getId() && reservierung.getDateDebut() == reservierungForm.getDateDebut()){
+                    selectedFahrzeug.remove(fahrzeug);
+                }
+            }
+        }
+        model.addAttribute("selectedFahrzeug", selectedFahrzeug);
+        model.addAttribute("reservierungForm", reservierungForm);
+
         return "listeFahrzeug";
+
     }
 
-
-    @RequestMapping(value = { "/recherche" }, method = RequestMethod.POST)
-    public String saveReservierung(Model model, @ModelAttribute("reservierungForm") ReservierungForm reservierungForm){
-        int benutzerId = reservierungForm.getBenutzerId();
-        int fahrzeugId = reservierungForm.getFahrzeugId();
-        String fahrzeugType = reservierungForm.getFahrzeugType();
-        Date dateDebut = reservierungForm.getDateDebut();
-        int duree = reservierungForm.getDuree();
-        int prix = reservierungForm.getPrix();
-
-        if(benutzerId != 0) {
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            Reservierung reservierung = new Reservierung(benutzerId, fahrzeugId, fahrzeugType, dateDebut, duree, prix);
-
-            HttpEntity<Reservierung> httpEntity = new HttpEntity<>(reservierung, headers);
-            restTemplate.postForObject(urlReservierung + "/Reservierung", httpEntity, Reservierung.class);
-            return "redirect:/liste";
+    @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.GET)
+    public String selectedFahrzeug(Model model, @PathVariable int id) {
+        Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
+        for (Fahrzeug fahrzeug : fahrzeugs) {
+            if(fahrzeug.getId() == id){
+                int prix = currentReservierungForm.getNombreKm()*fahrzeug.getTarifKm()+fahrzeug.getPrixReservation();
+                model.addAttribute("fahrzeug", fahrzeug);
+                model.addAttribute("prix", prix);
+            }
         }
-        model.addAttribute("errorMessage", errorMessage);
-        return "recherche";
+
+        return "reservierung";
+    }
+
+    @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.POST)
+    public String sendBenutzer(Model model) {
+        Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
+
+
+        //Bonjour Juliette et Rodolphe. Aujourd'hui il faut penser à faire le post de notre benutzer et Reservierung. Bon courage !!!
+        //bisous
+
+        return "reservierung";
     }
 
 
