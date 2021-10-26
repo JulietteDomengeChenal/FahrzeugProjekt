@@ -1,5 +1,6 @@
 package com.example.front.form;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -7,18 +8,19 @@ import java.util.Date;
 public class ReservierungForm {
 
     private String fahrzeugType;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private int dateDebut;
-    private int duree;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateDebut;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateFin;
     private int nombreKm;
 
     //-------------------------------CONSTRUCTOR--------------------------------------//
     public ReservierungForm() { }
 
-    public ReservierungForm(String fahrzeugType, int dateDebut, int duree, int nombreKm) {
+    public ReservierungForm(String fahrzeugType, Date dateDebut, Date dateFin, int nombreKm) {
         this.fahrzeugType = fahrzeugType;
         this.dateDebut = dateDebut;
-        this.duree = duree;
+        this.dateFin = dateFin;
         this.nombreKm = nombreKm;
     }
 
@@ -26,12 +28,14 @@ public class ReservierungForm {
     public String getFahrzeugType() {
         return fahrzeugType;
     }
-    public int getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
-    public int getDuree() {
-        return duree;
+
+    public Date getDateFin() {
+        return dateFin;
     }
+
     public int getNombreKm() {
         return nombreKm;
     }
@@ -40,11 +44,11 @@ public class ReservierungForm {
     public void setFahrzeugType(String fahrzeugType) {
         this.fahrzeugType = fahrzeugType;
     }
-    public void setDateDebut(int dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
-    public void setDuree(int duree) {
-        this.duree = duree;
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
     }
     public void setNombreKm(int nombreKm) {
         this.nombreKm = nombreKm;

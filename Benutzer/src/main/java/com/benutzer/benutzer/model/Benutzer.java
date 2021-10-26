@@ -1,5 +1,7 @@
 package com.benutzer.benutzer.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class Benutzer {
     private String prenom;
 
     @Column(name = "dateNaissance")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateNaissance;
 
     @Column(name = "numeroPermis")

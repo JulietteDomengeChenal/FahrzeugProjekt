@@ -23,6 +23,28 @@
     <p th:text="${prix}"></p>
 
 
+    <form th:action="@{/reservierung} + '/' + ${fahrzeug.id}"
+          th:object="${benutzerForm}" method="POST">
+        Prénom :
+        <input type="text" th:field="*{prenom}" /> <br/>
+        Nom :
+        <input type="text" th:field="*{nom}"/> <br/>
+        Date de naissance :
+        <input type="text" th:field="*{dateNaissance}" /> <br/>
+        Numéro de permis :
+        <input type="text" th:field="*{numeroPermis}" /> <br/>
+        Année Obtention :
+        <input type="text" th:field="*{anneeObtention}" /> <br/>
+
+        Prix:
+        <input type="text" th:field="*{prix}" th:attr = "value = ${prix}" /> <br/>
+        Fahrzeug Type:
+        <input type="text" th:field="*{fahrzeugType}" th:value="${fahrzeug.type}" /> <br/>
+
+        <input type="submit" value="Create" />
+    </form>
+
+
 <!--    -->
 <!--    <div th:if="${errorMessage}" th:utext="${errorMessage}"-->
 <!--         style="color:red;font-style:italic;">-->

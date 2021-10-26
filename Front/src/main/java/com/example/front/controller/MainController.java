@@ -1,7 +1,9 @@
 package com.example.front.controller;
 
 
+import com.example.front.form.BenutzerForm;
 import com.example.front.form.ReservierungForm;
+import com.example.front.model.Benutzer;
 import com.example.front.model.Fahrzeug;
 import com.example.front.model.Reservierung;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,10 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -73,7 +72,10 @@ public class MainController {
                 selectedFahrzeug.add(fahrzeug);
             }
             for (Reservierung reservierung : reservierungs){
-                if(reservierung.getFahrzeugId() == fahrzeug.getId() && reservierung.getDateDebut() == reservierungForm.getDateDebut()){
+                if(reservierung.getFahrzeugId() == fahrzeug.getId() && (
+                        (reservierungForm.getDateDebut().before(reservierung.getDateFin()) && reservierungForm.getDateDebut().after(reservierung.getDateDebut()))
+                        || (reservierungForm.getDateFin().after(reservierung.getDateDebut()) && reservierungForm.getDateDebut().before(reservierung.getDateFin()))
+                )){
                     selectedFahrzeug.remove(fahrzeug);
                 }
             }
@@ -87,28 +89,43 @@ public class MainController {
 
     @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.GET)
     public String selectedFahrzeug(Model model, @PathVariable int id) {
+        int prix = 0;
+        String fahrzeugType = null;
         Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
         for (Fahrzeug fahrzeug : fahrzeugs) {
             if(fahrzeug.getId() == id){
-                int prix = currentReservierungForm.getNombreKm()*fahrzeug.getTarifKm()+fahrzeug.getPrixReservation();
+                prix = currentReservierungForm.getNombreKm()*fahrzeug.getTarifKm()+fahrzeug.getPrixReservation();
+                fahrzeugType = fahrzeug.getType();
                 model.addAttribute("fahrzeug", fahrzeug);
                 model.addAttribute("prix", prix);
             }
         }
 
+        BenutzerForm benutzerForm = new BenutzerForm();
+        benutzerForm.setPrix(prix);
+        benutzerForm.setFahrzeugType(fahrzeugType);
+        model.addAttribute("benutzerForm", benutzerForm);
+
         return "reservierung";
     }
 
     @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.POST)
-    public String sendBenutzer(Model model) {
-        Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
+    public String sendBenutzerReservierung(Model model, @ModelAttribute("benutzerForm") BenutzerForm benutzerForm,
+            @PathVariable int id) {
 
+        Benutzer benutzer = new Benutzer(benutzerForm.getNom(),benutzerForm.getPrenom(),benutzerForm.getDateNaissance(),
+                benutzerForm.getNumeroPermis(),benutzerForm.getAnneeObtention());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(benutzer, headers);
+        benutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer",httpEntity,Benutzer.class);
 
-        //Bonjour Juliette et Rodolphe. Aujourd'hui il faut penser à faire le post de notre benutzer et Reservierung. Bon courage !!!
-        //bisous
+        Reservierung reservierung = new Reservierung(benutzer.getId(), id, benutzerForm.getFahrzeugType(),
+                currentReservierungForm.getDateDebut(), currentReservierungForm.getDateFin(), benutzerForm.getPrix());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Reservierung> http2Entity = new HttpEntity<>(reservierung, headers);
+        restTemplate.postForObject(urlReservierung + "/Reservierung", http2Entity, Reservierung.class);
 
-        return "reservierung";
+        return "confirmation";
     }
-
 
 }

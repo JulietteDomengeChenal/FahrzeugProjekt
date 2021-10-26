@@ -38,7 +38,7 @@ public class ReservierungController {
         editReservierung.setFahrzeugType(reservierung.getFahrzeugType());
         editReservierung.setFahrzeugId(reservierung.getFahrzeugId());
         editReservierung.setBenutzerId(reservierung.getBenutzerId());
-        editReservierung.setDuree(reservierung.getDuree());
+        editReservierung.setDateFin(reservierung.getDateFin());
         editReservierung.setDateDebut(reservierung.getDateDebut());
         editReservierung.setPrix(reservierung.getPrix());
         return reservierungRepository.save(editReservierung);

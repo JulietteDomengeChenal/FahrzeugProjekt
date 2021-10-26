@@ -5,6 +5,8 @@ import com.benutzer.benutzer.model.Benutzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +27,8 @@ public class BenutzerController {
     }
 
     @PostMapping(value= "/Benutzer")
-    public void ajouterPersonnage(@RequestBody Benutzer benutzer){
+    public Benutzer ajouterPersonnage(@RequestBody Benutzer benutzer){
         benutzerRepository.save(benutzer);
+        return benutzer;
     }
-
 }

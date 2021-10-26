@@ -1,6 +1,8 @@
 package com.example.reservierung;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,10 +26,12 @@ public class Reservierung {
     private String fahrzeugType;
 
     @Column(name = "dateDebut")
-    private int dateDebut;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateDebut;
 
-    @Column(name = "duree")
-    private int duree;
+    @Column(name = "dateFin")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateFin;
 
     @Column(name = "prix")
     private int prix;
@@ -40,7 +44,7 @@ public class Reservierung {
                 ", fahrzeugId=" + fahrzeugId +
                 ", fahrzeugType='" + fahrzeugType + '\'' +
                 ", dateDebut=" + dateDebut +
-                ", duree=" + duree +
+                ", dateFin=" + dateFin +
                 ", prix=" + prix + '}';
     }
 
@@ -48,12 +52,12 @@ public class Reservierung {
     public Reservierung() {
     }
 
-    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, int dateDebut, int duree, int prix) {
+    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, Date dateFin, int prix) {
         this.benutzerId = benutzerId;
         this.fahrzeugId = fahrzeugId;
         this.fahrzeugType = fahrzeugType;
         this.dateDebut = dateDebut;
-        this.duree = duree;
+        this.dateFin = dateFin;
         this.prix = prix;
     }
 
@@ -74,12 +78,12 @@ public class Reservierung {
         return fahrzeugType;
     }
 
-    public int getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public int getDuree() {
-        return duree;
+    public Date getDateFin() {
+        return dateFin;
     }
 
     public int getPrix() {
@@ -103,12 +107,12 @@ public class Reservierung {
         this.fahrzeugType = fahrzeugType;
     }
 
-    public void setDateDebut(int dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public void setDuree(int duree) {
-        this.duree = duree;
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
     }
 
     public void setPrix(int prix) {

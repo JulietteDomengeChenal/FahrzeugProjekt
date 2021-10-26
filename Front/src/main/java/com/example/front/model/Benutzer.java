@@ -1,7 +1,11 @@
 package com.example.front.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.transaction.Transactional;
+import javax.persistence.EntityManager;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,11 +14,21 @@ public class Benutzer {
     private int id;
     private String nom;
     private String prenom;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateNaissance;
     private int numeroPermis;
     private int anneeObtention;
 
+
     public Benutzer() {
+    }
+
+    public Benutzer(String nom, String prenom, Date dateNaissance, int numeroPermis, int anneeObtention) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.numeroPermis = numeroPermis;
+        this.anneeObtention = anneeObtention;
     }
 
     //---------------------------------GETTER----------------------------------------//
