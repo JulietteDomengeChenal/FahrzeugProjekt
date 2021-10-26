@@ -73,8 +73,10 @@ public class MainController {
             }
             for (Reservierung reservierung : reservierungs){
                 if(reservierung.getFahrzeugId() == fahrzeug.getId() && (
-                        (reservierungForm.getDateDebut().before(reservierung.getDateFin()) && reservierungForm.getDateDebut().after(reservierung.getDateDebut()))
-                        || (reservierungForm.getDateFin().after(reservierung.getDateDebut()) && reservierungForm.getDateDebut().before(reservierung.getDateFin()))
+//                     (reservierungForm.getDateDebut().before(reservierung.getDateFin()) && reservierungForm.getDateDebut().after(reservierung.getDateDebut()))
+//                     || (reservierungForm.getDateFin().after(reservierung.getDateDebut()) && reservierungForm.getDateDebut().before(reservierung.getDateFin()))
+                    (!reservierung.getDateFin().before(reservierungForm.getDateDebut()) && !reservierung.getDateDebut().after(reservierungForm.getDateDebut()))
+                    || (!reservierung.getDateDebut().after(reservierungForm.getDateFin()) && !reservierung.getDateFin().before(reservierungForm.getDateDebut()))
                 )){
                     selectedFahrzeug.remove(fahrzeug);
                 }
