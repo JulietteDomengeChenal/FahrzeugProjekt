@@ -15,6 +15,7 @@ public class BenutzerForm {
     private int numeroPermis;
     private int anneeObtention;
     private double prix;
+    private String prixAffiche;
     private String fahrzeugType;
 
 
@@ -44,6 +45,11 @@ public class BenutzerForm {
     public double getPrix() {
         return prix;
     }
+
+    public String getPrixAffiche() {
+        return prixAffiche;
+    }
+
     public String getFahrzeugType() {
         return fahrzeugType;
     }
@@ -70,6 +76,11 @@ public class BenutzerForm {
     public void setPrix(double prix) {
         this.prix = prix;
     }
+
+    public void setPrixAffiche(String prixAffiche) {
+        this.prixAffiche = prixAffiche;
+    }
+
     public void setFahrzeugType(String fahrzeugType) {
         this.fahrzeugType = fahrzeugType;
     }

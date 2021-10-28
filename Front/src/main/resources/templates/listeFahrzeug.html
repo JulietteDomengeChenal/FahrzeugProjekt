@@ -21,12 +21,12 @@
             <div class="divInfos">
                 <div class="divGauche">
                     <h4 class="marginXS" th:utext="${fahrzeug.marque} + ' ' + ${fahrzeug.modele }">...</h4>
-                    <p class="italique marginS" th:utext="${fahrzeug.couleur}">...</p>
+                    <p class="italique marginXS" th:utext="${fahrzeug.couleur}">...</p>
+                    <p class="italique" th:if="${fahrzeug.cylindree} != 0" th:utext="'Cylindrée : ' + ${fahrzeug.cylindree} + ' cm3'"> </p>
+                    <p class="italique" th:if="${fahrzeug.volumeChargement} != 0" th:utext="'Volume de chargement : ' + ${fahrzeug.volumeChargement} + ' m3'"> </p>
                     <span class="marginXS">Prix de reservation : </span> <strong th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
                     <br>
                     <span class="marginXS">Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
-                    <p th:utext="${fahrzeug.cylindree}" th:if="${fahrzeug.cylindree} != 0">...</p>
-                    <p th:utext="${fahrzeug.volumeChargement}" th:if="${fahrzeug.volumeChargement} != 0">...</p>
                 </div>
                 <div class="divDroite alignCenter">
                     <img class="imgCard" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele }">

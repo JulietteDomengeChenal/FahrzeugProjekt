@@ -22,14 +22,15 @@
                 <div>
                     <h2 class="marginS">Récapitulatif du véhicule</h2>
                     <h4 class="marginXS" th:utext="${fahrzeug.marque} + ' ' + ${fahrzeug.modele }">...</h4>
-                    <p class="italique marginS" th:utext="${fahrzeug.couleur}">...</p>
+                    <p class="italique marginXS" th:utext="${fahrzeug.couleur}">...</p>
+                    <p class="italique" th:if="${fahrzeug.cylindree} != 0" th:utext="'Cylindrée : ' + ${fahrzeug.cylindree} + ' cm3'"> </p>
+                    <p class="italique" th:if="${fahrzeug.volumeChargement} != 0" th:utext="'Volume de chargement : ' + ${fahrzeug.volumeChargement} + ' m3'"> </p>
                     <span class="marginXS">Prix de reservation : </span> <strong th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
                     <br>
-                    <span>Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
-                    <p th:utext="${fahrzeug.cylindree}" th:if="${fahrzeug.cylindree} != 0">...</p>
-                    <p th:utext="${fahrzeug.volumeChargement}" th:if="${fahrzeug.volumeChargement} != 0">...</p>
-                    <br>
-                    <strong style="color:#56ccb8" th:text="'Prix total : ' + ${prix} + ' €'"></strong>
+                    <div class="marginS">
+                        <span>Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
+                    </div>
+                    <strong style="color:#56ccb8" th:text="'Prix total : ' + ${prixAffiche} + ' €'"></strong>
                 </div>
             </div>
             <div class="alignCenter divDroite65">
@@ -61,11 +62,11 @@
                 <label class="form-label" for="anneeObtention">Année Obtention : </label>
                 <input class="form-control" id="anneeObtention" type="text" th:field="*{anneeObtention}" />
             </div>
-            <div class="mb-3 col-md-6">
-                <input class="form-control" type="text" th:field="*{prix}" th:attr = "value = ${prix}" th:if="${prix} == 0"/>
+            <div class="mb-3 col-md-3 input-group-sm">
+                <input class="form-control  divTransparent" type="text" th:field="*{prix}" th:attr = "value = ${prix}"/>
             </div>
-            <div class="mb-3">
-                <input class="form-control" type="text" th:field="*{fahrzeugType}" th:value="${fahrzeug.type}" th:if="${prix} == 0" />
+            <div class="mb-3 col-md-3 input-group-sm">
+                <input class="form-control divTransparent" type="text" th:field="*{fahrzeugType}" th:value="${fahrzeug.type}"/>
             </div>
 
             <div class="btnForm col-md-12">

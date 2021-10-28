@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,11 +66,22 @@ public class MainController {
         Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
         Reservierung[] reservierungs = restTemplate.getForObject( urlReservierung + "/ListeReservierung", Reservierung[].class );
         currentReservierungForm = reservierungForm;
+        int age = reservierungForm.getAge();
+
+        if(age < 18){
+            return "tropJeune";
+        }
 
         List<Fahrzeug> selectedFahrzeug = new ArrayList<>();
 
         for (Fahrzeug fahrzeug : fahrzeugs) {
-            if (reservierungForm.getFahrzeugType().equals(fahrzeug.getType())){
+            if (reservierungForm.getFahrzeugType().equals(fahrzeug.getType()) && age>25){
+                selectedFahrzeug.add(fahrzeug);
+            }
+            else if(age<21 && fahrzeug.getChevauxFiscaux()<8 && reservierungForm.getFahrzeugType().equals(fahrzeug.getType())){
+                selectedFahrzeug.add(fahrzeug);
+            }
+            else if(age<25 && age>=21 && fahrzeug.getChevauxFiscaux()<13 && reservierungForm.getFahrzeugType().equals(fahrzeug.getType())){
                 selectedFahrzeug.add(fahrzeug);
             }
             for (Reservierung reservierung : reservierungs){
@@ -92,12 +105,24 @@ public class MainController {
     @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.GET)
     public String selectedFahrzeug(Model model, @PathVariable int id) {
         double prix = 0;
+        String prixAffiche = null;
         String fahrzeugType = null;
         Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
         for (Fahrzeug fahrzeug : fahrzeugs) {
             if(fahrzeug.getId() == id){
-                prix = currentReservierungForm.getNombreKm()*fahrzeug.getTarifKm()+fahrzeug.getPrixReservation();
+                if(fahrzeug.getType().contains("wagen")) {
+                    prix = currentReservierungForm.getNombreKm() * fahrzeug.getTarifKm() + fahrzeug.getPrixReservation();
+                }
+                else if(fahrzeug.getType().contains("motorrad")){
+                    prix = currentReservierungForm.getNombreKm() * fahrzeug.getTarifKm() * 0.001 * fahrzeug.getCylindree() + fahrzeug.getPrixReservation();
+                }
+                else if(fahrzeug.getType().contains("nutzfahrzeug")){
+                    prix = currentReservierungForm.getNombreKm() * fahrzeug.getTarifKm() * 0.05 * fahrzeug.getVolumeChargement() + fahrzeug.getPrixReservation();
+                }
+                NumberFormat formatter = new DecimalFormat("#0.00");
+                prixAffiche=formatter.format(prix);
                 fahrzeugType = fahrzeug.getType();
+                model.addAttribute("prixAffiche", prixAffiche);
                 model.addAttribute("fahrzeug", fahrzeug);
                 model.addAttribute("prix", prix);
             }

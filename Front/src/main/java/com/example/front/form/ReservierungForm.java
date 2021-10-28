@@ -12,15 +12,17 @@ public class ReservierungForm {
     private Date dateDebut;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateFin;
+    private int age;
     private int nombreKm;
 
     //-------------------------------CONSTRUCTOR--------------------------------------//
     public ReservierungForm() { }
 
-    public ReservierungForm(String fahrzeugType, Date dateDebut, Date dateFin, int nombreKm) {
+    public ReservierungForm(String fahrzeugType, Date dateDebut, Date dateFin, int age, int nombreKm) {
         this.fahrzeugType = fahrzeugType;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.age = age;
         this.nombreKm = nombreKm;
     }
 
@@ -31,11 +33,12 @@ public class ReservierungForm {
     public Date getDateDebut() {
         return dateDebut;
     }
-
     public Date getDateFin() {
         return dateFin;
     }
-
+    public int getAge() {
+        return age;
+    }
     public int getNombreKm() {
         return nombreKm;
     }
@@ -49,6 +52,9 @@ public class ReservierungForm {
     }
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
+    }
+    public void setAge(int age) {
+        this.age = age;
     }
     public void setNombreKm(int nombreKm) {
         this.nombreKm = nombreKm;
