@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} != null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
 <div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 <div class="bodyDiv">

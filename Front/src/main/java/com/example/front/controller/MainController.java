@@ -2,12 +2,13 @@ package com.example.front.controller;
 
 
 import com.example.front.form.BenutzerForm;
+import com.example.front.form.LoginForm;
+import com.example.front.form.NewBenutzerForm;
 import com.example.front.form.ReservierungForm;
 import com.example.front.model.Benutzer;
 import com.example.front.model.Fahrzeug;
 import com.example.front.model.Reservierung;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,12 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -31,6 +33,8 @@ public class MainController {
     private List<Reservierung> reservierungs;
     private List<Fahrzeug> fahrzeugs;
     private ReservierungForm currentReservierungForm = new ReservierungForm();
+
+    private Benutzer currentBenutzer = new Benutzer();
 
     String urlReservierung = "http://localhost:8087";
     String urlFahrzeug = "http://localhost:8082";
@@ -49,14 +53,88 @@ public class MainController {
         assert restTemplate != null;
         reservierungs = restTemplate.getForObject( urlReservierung + "/ListeReservierung", List.class );
         model.addAttribute("reservierungs", reservierungs);
+        model.addAttribute("currentBenutzer", currentBenutzer);
         return "accueil";
     }
+
+//----------------Afficher le formulaire de Login-----------------------------------------------------------------------
+    @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+    public String showFormulaireLogin(Model model){
+        currentBenutzer = null;
+        LoginForm loginForm = new LoginForm();
+        model.addAttribute("loginForm", loginForm);
+        model.addAttribute("currentBenutzer", currentBenutzer);
+
+        return "login";
+    }
+
+//----------------Rechercher l'utilisateur-----------------------------------------------------------------------------
+    @RequestMapping(value = { "/login" }, method = RequestMethod.POST)
+    public String findBenutzer(Model model, @ModelAttribute("loginForm") LoginForm loginForm) {
+        Benutzer[] benutzers = restTemplate.getForObject( urlBenutzer + "/Benutzer", Benutzer[].class );
+        for (Benutzer benutzer : benutzers){
+            if (benutzer.getNom().contains(loginForm.getNom()) &&
+            benutzer.getPrenom().contains(loginForm.getPrenom()) &&
+            benutzer.getMotDePasse().contains(loginForm.getMotDePasse())){
+                currentBenutzer = benutzer;
+            }
+        }
+        model.addAttribute("currentBenutzer", currentBenutzer);
+        return "redirect:/recherche";
+    }
+
+//----------------Afficher le formulaire de new Benutzer----------------------------------------------------------------
+    @RequestMapping(value = { "/newBenutzer" }, method = RequestMethod.GET)
+    public String showFormulairenewBenutzer(Model model){
+        NewBenutzerForm newBenutzerForm = new NewBenutzerForm();
+        model.addAttribute("newBenutzerForm", newBenutzerForm);
+        model.addAttribute("currentBenutzer", currentBenutzer);
+        return "newBenutzer";
+    }
+
+//----------------Enregistrer nouvel utilisateur------------------------------------------------------------------------
+    @RequestMapping(value = { "/newBenutzer" }, method = RequestMethod.POST)
+    public String addBenutzer(Model model, @ModelAttribute("newBenutzerForm") NewBenutzerForm newBenutzerForm) {
+        Benutzer benutzer = new Benutzer(newBenutzerForm.getNom(), newBenutzerForm.getPrenom(),
+                newBenutzerForm.getMotDePasse(), newBenutzerForm.getDateNaissance(),
+                newBenutzerForm.getNumeroPermis(), newBenutzerForm.getAnneeObtention());
+        currentBenutzer = benutzer;
+
+        String pattern = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(pattern);
+
+        Date today = Calendar.getInstance().getTime();
+        String todayAsString = df.format(today);
+        LocalDate todayParsed = LocalDate.parse(todayAsString);
+
+        String birth = df.format(currentBenutzer.getDateNaissance());
+        LocalDate date = LocalDate.parse(birth);
+
+        Period period = Period.between(date, todayParsed);
+        int age = Math.abs(period.getYears());
+
+        if(age < 18){
+            return "tropJeune";
+        }
+
+        String numString = Long.toString(currentBenutzer.getNumeroPermis());
+        if(numString.length() != 12){
+            return "immatInvalide";
+        }
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(currentBenutzer, headers);
+        currentBenutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer", httpEntity, Benutzer.class);
+        model.addAttribute("currentBenutzer", currentBenutzer);
+        return "redirect:/recherche";
+    }
+
 
 //----------------Afficher le formulaire--------------------------------------------------------------------------------
     @RequestMapping(value = { "/recherche" }, method = RequestMethod.GET)
     public String showFormulaire(Model model){
         ReservierungForm reservierungForm = new ReservierungForm();
         model.addAttribute("reservierungForm", reservierungForm);
+        model.addAttribute("currentBenutzer", currentBenutzer);
         return "recherche";
     }
 
@@ -66,11 +144,19 @@ public class MainController {
         Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
         Reservierung[] reservierungs = restTemplate.getForObject( urlReservierung + "/ListeReservierung", Reservierung[].class );
         currentReservierungForm = reservierungForm;
-        int age = reservierungForm.getAge();
 
-        if(age < 18){
-            return "tropJeune";
-        }
+        String pattern = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(pattern);
+
+        Date today = Calendar.getInstance().getTime();
+        String todayAsString = df.format(today);
+        LocalDate todayParsed = LocalDate.parse(todayAsString);
+
+        String birth = df.format(currentBenutzer.getDateNaissance());
+        LocalDate date = LocalDate.parse(birth);
+
+        Period period = Period.between(date, todayParsed);
+        int age = Math.abs(period.getYears());
 
         List<Fahrzeug> selectedFahrzeug = new ArrayList<>();
 
@@ -97,7 +183,7 @@ public class MainController {
         }
         model.addAttribute("selectedFahrzeug", selectedFahrzeug);
         model.addAttribute("reservierungForm", reservierungForm);
-
+        model.addAttribute("currentBenutzer", currentBenutzer);
         return "listeFahrzeug";
 
     }
@@ -132,6 +218,7 @@ public class MainController {
         benutzerForm.setPrix(prix);
         benutzerForm.setFahrzeugType(fahrzeugType);
         model.addAttribute("benutzerForm", benutzerForm);
+        model.addAttribute("currentBenutzer", currentBenutzer);
 
         return "reservierung";
     }
@@ -140,18 +227,19 @@ public class MainController {
     public String sendBenutzerReservierung(Model model, @ModelAttribute("benutzerForm") BenutzerForm benutzerForm,
             @PathVariable int id) {
 
-        Benutzer benutzer = new Benutzer(benutzerForm.getNom(),benutzerForm.getPrenom(),benutzerForm.getDateNaissance(),
-                benutzerForm.getNumeroPermis(),benutzerForm.getAnneeObtention());
+//        Benutzer benutzer = new Benutzer(benutzerForm.getNom(),benutzerForm.getPrenom(), benutzerbenutzerForm.getDateNaissance(),
+//                benutzerForm.getNumeroPermis(),benutzerForm.getAnneeObtention());
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(benutzer, headers);
-        benutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer",httpEntity,Benutzer.class);
+        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(currentBenutzer, headers);
+        currentBenutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer",httpEntity,Benutzer.class);
 
-        Reservierung reservierung = new Reservierung(benutzer.getId(), id, benutzerForm.getFahrzeugType(),
+        Reservierung reservierung = new Reservierung(currentBenutzer.getId(), id, benutzerForm.getFahrzeugType(),
                 currentReservierungForm.getDateDebut(), currentReservierungForm.getDateFin(), benutzerForm.getPrix());
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Reservierung> http2Entity = new HttpEntity<>(reservierung, headers);
         restTemplate.postForObject(urlReservierung + "/Reservierung", http2Entity, Reservierung.class);
 
+        model.addAttribute("currentBenutzer", currentBenutzer);
         return "confirmation";
     }
 

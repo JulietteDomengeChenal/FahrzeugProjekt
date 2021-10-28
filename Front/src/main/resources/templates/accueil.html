@@ -9,7 +9,8 @@
 <body>
 
 
-<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} != null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
 <div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 
@@ -21,7 +22,9 @@
             Trouvez la voiture de vos rêves, la moto qui vous fera frissonner, <br/>
             ou encore l'utilitaire qui déménage !
         </h3>
-        <a href="recherche" class="btn btnPrimary"> En voiture Simone ! </a>
+        <a th:if="${currentBenutzer} != null" href="recherche" class="btn btnPrimary"> En voiture Simone ! </a>
+        <a th:if="${currentBenutzer} == null" href="login" class="btn btnPrimary"> Me connecter </a>
+        <a th:if="${currentBenutzer} == null" href="newBenutzer" class="btn btnPrimary"> Créer mon compte </a>
     </div>
 
     <div class="divDroite alignCenter">

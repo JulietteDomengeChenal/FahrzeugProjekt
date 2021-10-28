@@ -12,7 +12,7 @@ public class BenutzerForm {
     private String prenom;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateNaissance;
-    private int numeroPermis;
+    private long numeroPermis;
     private int anneeObtention;
     private double prix;
     private String prixAffiche;
@@ -36,7 +36,7 @@ public class BenutzerForm {
     public Date getDateNaissance() {
         return dateNaissance;
     }
-    public int getNumeroPermis() {
+    public long getNumeroPermis() {
         return numeroPermis;
     }
     public int getAnneeObtention() {
@@ -67,7 +67,7 @@ public class BenutzerForm {
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
-    public void setNumeroPermis(int numeroPermis) {
+    public void setNumeroPermis(long numeroPermis) {
         this.numeroPermis = numeroPermis;
     }
     public void setAnneeObtention(int anneeObtention) {

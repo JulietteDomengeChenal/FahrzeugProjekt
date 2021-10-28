@@ -15,12 +15,20 @@
             <ul th:fragment="my-navBar">
                 <li><a th:href="@{/accueil}">Accueil</a></li>
                 <li><a th:href="@{/recherche}">Recherche</a></li>
-                <li><a th:href="@{/listeFahrzeug}">Véhicules</a></li>
+<!--                <li><a th:href="@{/listeFahrzeug}">Véhicules</a></li>-->
+                <li><a  th:href="@{/monCompte}">Mon compte</a></li>
+                <li><a  th:href="@{/login}">Déconnexion</a></li>
     <!--            <li><a th:href="@{/about}">About</a></li>-->
             </ul>
         </div>
+        <div>
+            <ul th:fragment="my-navBarOut">
+                <li><a th:href="@{/accueil}">Accueil</a></li>
+                <li><a th:href="@{/newBenutzer}">M'enregistrer</a></li>
+                <li><a  th:href="@{/login}">Connexion</a></li>
+            </ul>
+        </div>
     </div>
-
 
     <div>
 

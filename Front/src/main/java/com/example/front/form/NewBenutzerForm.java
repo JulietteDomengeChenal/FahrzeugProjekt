@@ -1,38 +1,21 @@
-package com.benutzer.benutzer.model;
+package com.example.front.form;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name= "Benutzer")
-public class Benutzer {
+public class NewBenutzerForm {
 
-    @Id
-    @GeneratedValue
     private int id;
-
-    @Column(name = "nom")
     private String nom;
-
-    @Column(name = "prenom")
     private String prenom;
-
-    @Column(name = "dateNaissance")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date dateNaissance;
-
-    @Column(name = "numeroPermis")
-    private long numeroPermis;
-
-    @Column(name= "motDePasse")
     private String motDePasse;
-
-    @Column(name = "anneeObtention")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateNaissance;
+    private long numeroPermis;
     private int anneeObtention;
 
-    public Benutzer() {
+    public NewBenutzerForm() {
     }
 
     public int getId() {
@@ -59,6 +42,14 @@ public class Benutzer {
         this.prenom = prenom;
     }
 
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
     public Date getDateNaissance() {
         return dateNaissance;
     }
@@ -77,14 +68,6 @@ public class Benutzer {
 
     public int getAnneeObtention() {
         return anneeObtention;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
     }
 
     public void setAnneeObtention(int anneeObtention) {

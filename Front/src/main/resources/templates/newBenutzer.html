@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div th:if="${currentBenutzer} != null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
+
+
+<div class="bodyDivRecap">
+
+    <form th:action="@{/newBenutzer}"
+          th:object="${newBenutzerForm}" method="POST" class="form70">
+        <div class="mb-3 col-md-6 input-group-sm">
+            <label class="form-label" for="prenom"> Prénom :</label>
+            <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />
+        </div>
+        <div class="mb-3 col-md-6 ps-3 input-group-sm">
+            <label class="form-label" for="nom"> Nom :</label>
+            <input class="form-control" id="nom" type="text" th:field="*{nom}"/>
+        </div>
+        <div class="mb-3 col-md-6 input-group-sm">
+            <label class="form-label" for="mdp"> Mot de passe : </label>
+            <input class="form-control" id="mdp" type="text" th:field="*{motDePasse}" />
+        </div>
+        <div class="mb-3 col-md-6 ps-3 input-group-sm">
+            <label class="form-label" for="dateNaissance"> Date de naissance : </label>
+            <input class="form-control" id="dateNaissance" type="text" th:field="*{dateNaissance}" />
+        </div>
+        <div class="mb-3 col-md-6 input-group-sm">
+            <label class="form-label" for="numPermis"> Numéro de permis : </label>
+            <input class="form-control" id="numPermis" type="text" th:field="*{numeroPermis}" />
+        </div>
+        <div class="mb-3 col-md-6 ps-3 input-group-sm">
+            <label class="form-label" for="annee"> Année d'obtention : </label>
+            <input class="form-control" id="annee" type="text" th:field="*{anneeObtention}" />
+        </div>
+        <div class="btnForm col-md-12">
+            <input class="btn btnPrimary" type="submit" value="En voiture Simone !" />
+        </div>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>
