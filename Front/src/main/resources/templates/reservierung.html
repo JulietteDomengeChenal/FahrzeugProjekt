@@ -3,46 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Recherche</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 
-<div class="bodyDiv">
+<div class="bodyDivRecap">
 
-    <h1>Informations sur le véhicule souhaité</h1>
+<!--    <h2 class="marginM">Encore un effort ... et en voiture !! </h2>-->
 
-    <p th:text="${fahrzeug.couleur}"></p>
-    <p th:text="${fahrzeug.modele}"></p>
-    <p th:text="${fahrzeug.immatriculation}"></p>
-    <p th:text="${fahrzeug.marque}"></p>
-    <p th:text="${fahrzeug.type}"></p>
+    <div class="divCards">
+        <div class="divRecap">
+            <div class="divGauche35">
+                <div>
+                    <h2 class="marginS">Récapitulatif du véhicule</h2>
+                    <h4 class="marginXS" th:utext="${fahrzeug.marque} + ' ' + ${fahrzeug.modele }">...</h4>
+                    <p class="italique marginS" th:utext="${fahrzeug.couleur}">...</p>
+                    <span class="marginXS">Prix de reservation : </span> <strong th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
+                    <br>
+                    <span>Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
+                    <p th:utext="${fahrzeug.cylindree}" th:if="${fahrzeug.cylindree} != 0">...</p>
+                    <p th:utext="${fahrzeug.volumeChargement}" th:if="${fahrzeug.volumeChargement} != 0">...</p>
+                    <br>
+                    <strong style="color:#56ccb8" th:text="'Prix total : ' + ${prix} + ' €'"></strong>
+                </div>
+            </div>
+            <div class="alignCenter divDroite65">
+                <img class="imgRecap" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele }">
+            </div>
+        </div>
+    </div>
 
-    <p th:text="${prix}"></p>
+    <div class="divForm">
+        <form th:action="@{/reservierung} + '/' + ${fahrzeug.id}"
+              th:object="${benutzerForm}" method="POST" class="form70">
+            <div class="mb-3 col-md-6 input-group-sm">
+                <label class="form-label" for="prenom"> Prénom :</label>
+                <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />
+            </div>
+            <div class="mb-3 col-md-6 ps-3 input-group-sm">
+                <label class="form-label" for="nom"> Nom :</label>
+                <input class="form-control" id="nom" type="text" th:field="*{nom}"/>
+            </div>
+            <div class="mb-3 col-md-6 input-group-sm">
+                <label class="form-label" for="dateNaissance"> Date de naissance : </label>
+                <input class="form-control" id="dateNaissance" type="text" th:field="*{dateNaissance}" />
+            </div>
+            <div class="mb-3 col-md-6 ps-3 input-group-sm">
+                <label class="form-label" for="numeroPermis">Numéro de permis : </label>
+                <input class="form-control" id="numeroPermis" type="text" th:field="*{numeroPermis}" />
+            </div>
+            <div class="mb-3 col-md-6 input-group-sm">
+                <label class="form-label" for="anneeObtention">Année Obtention : </label>
+                <input class="form-control" id="anneeObtention" type="text" th:field="*{anneeObtention}" />
+            </div>
+            <div class="mb-3 col-md-6">
+                <input class="form-control" type="text" th:field="*{prix}" th:attr = "value = ${prix}" th:if="${prix} == 0"/>
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="text" th:field="*{fahrzeugType}" th:value="${fahrzeug.type}" th:if="${prix} == 0" />
+            </div>
 
+            <div class="btnForm col-md-12">
+                <input class="btn btnPrimary" type="submit" value="Je fonce ! " />
+            </div>
 
-    <form th:action="@{/reservierung} + '/' + ${fahrzeug.id}"
-          th:object="${benutzerForm}" method="POST">
-        Prénom :
-        <input type="text" th:field="*{prenom}" /> <br/>
-        Nom :
-        <input type="text" th:field="*{nom}"/> <br/>
-        Date de naissance :
-        <input type="text" th:field="*{dateNaissance}" /> <br/>
-        Numéro de permis :
-        <input type="text" th:field="*{numeroPermis}" /> <br/>
-        Année Obtention :
-        <input type="text" th:field="*{anneeObtention}" /> <br/>
+        </form>
+    </div>
 
-        Prix:
-        <input type="text" th:field="*{prix}" th:attr = "value = ${prix}" /> <br/>
-        Fahrzeug Type:
-        <input type="text" th:field="*{fahrzeugType}" th:value="${fahrzeug.type}" /> <br/>
-
-        <input type="submit" value="Create" />
-    </form>
 
 
 <!--    -->

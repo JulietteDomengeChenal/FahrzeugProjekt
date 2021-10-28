@@ -3,44 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
+
+<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 
-<div class="bodyDiv">
+<div class="bodyDivRow">
 
-    <h1>Bienvenue les men in black</h1>
-    <h2>Fahrzeug Projekt </h2>
-<!--    <h2 th:utext="${message}">..!..</h2>-->
+    <div class="divGauche">
+        <h1 class="marginM">Bienvenue sur La FABRIK </h1>
+        <h3 class="marginL">
+            Trouvez la voiture de vos rêves, la moto qui vous fera frissonner, <br/>
+            ou encore l'utilitaire qui déménage !
+        </h3>
+        <a href="recherche" class="btn btnPrimary"> En voiture Simone ! </a>
+    </div>
 
-    <a href="recherche">Faire une nouvelle réservation</a>
+    <div class="divDroite alignCenter">
+
+       <img th:src="@{/images/lamborghini.png}" alt="vroum" class="imgAccueil">
+
+    </div>
+
     <br/><br/>
+
     <div>
-        <table style="border: 1px solid #333">
-            <tr>
-                <th>Id</th>
-                <th>benutzerId</th>
-                <th>fahrzeugId</th>
-                <th>fahrzeugType</th>
-                <th>dateDebut</th>
-                <th>duree</th>
-                <th>prix</th>
-            </tr>
-            <tr th:each ="reservierung : ${reservierungs}">
-                <td th:utext="${reservierung.id}">...</td>
-                <td th:utext="${reservierung.benutzerId}">...</td>
-                <td th:utext="${reservierung.fahrzeugId}">...</td>
-                <td th:utext="${reservierung.fahrzeugType}">...</td>
-                <td th:utext="${reservierung.dateDebut}">...</td>
-                <td th:utext="${reservierung.dateFin}">...</td>
-                <td th:utext="${reservierung.prix}">...</td>
-                <!--                <td><a th:href="@{/editPerson} +'/' + ${reservierung.id}" > Edit</a></td>-->
-                <!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
-            </tr>
-        </table>
+
+
+
+<!--        <table style="border: 1px solid #333">-->
+<!--            <tr>-->
+<!--                <th>Id</th>-->
+<!--                <th>benutzerId</th>-->
+<!--                <th>fahrzeugId</th>-->
+<!--                <th>fahrzeugType</th>-->
+<!--                <th>dateDebut</th>-->
+<!--                <th>duree</th>-->
+<!--                <th>prix</th>-->
+<!--            </tr>-->
+<!--            <tr th:each ="reservierung : ${reservierungs}">-->
+<!--                <td th:utext="${reservierung.id}">...</td>-->
+<!--                <td th:utext="${reservierung.benutzerId}">...</td>-->
+<!--                <td th:utext="${reservierung.fahrzeugId}">...</td>-->
+<!--                <td th:utext="${reservierung.fahrzeugType}">...</td>-->
+<!--                <td th:utext="${reservierung.dateDebut}">...</td>-->
+<!--                <td th:utext="${reservierung.dateFin}">...</td>-->
+<!--                <td th:utext="${reservierung.prix}">...</td>-->
+<!--                &lt;!&ndash;                <td><a th:href="@{/editPerson} +'/' + ${reservierung.id}" > Edit</a></td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>&ndash;&gt;-->
+<!--            </tr>-->
+<!--        </table>-->
     </div>
 
 </div>

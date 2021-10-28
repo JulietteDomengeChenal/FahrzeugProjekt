@@ -3,29 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Recherche</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 
 <div class="bodyDiv">
 
-    <h1>Recherche</h1>
+    <div class="divRecherche">
+        <div>
+            <img th:src="@{/images/HondaNSX.png}" alt="vroom" class="imageVoiture">
+        </div>
+        <div class="titre">
+            <h2 class="marginM alignCenter">Je recherche mon véhicule</h2>
+        </div>
+    </div>
 
-    <form th:action="@{/recherche}"
-          th:object="${reservierungForm}" method="POST">
-        FahrzeugType:
-        <input type="text" th:field="*{fahrzeugType}" /> <br/>
-        DateDebut:
-        <input type="text" th:field="*{dateDebut}"/> <br/>
-        Duree:
-        <input type="text" th:field="*{dateFin}" /> <br/>
-        Nombre de km:
-        <input type="text" th:field="*{nombreKm}" /> <br/>
-        <input type="submit" value="Create" />
-    </form>
+    <div class="divForm">
+        <form th:action="@{/recherche}"
+              th:object="${reservierungForm}" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="type"> Fahrzeug Type:</label>
+                <input class="form-control" id="type" type="text" th:field="*{fahrzeugType}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="date"> Date de début:</label>
+                <input class="form-control" id="date" type="text" th:field="*{dateDebut}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="duree"> Date de fin: </label>
+                <input class="form-control" id="duree" type="text" th:field="*{dateFin}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="nbrkm">Nombre de km: </label>
+                <input class="form-control" id="nbrkm" type="text" th:field="*{nombreKm}" />
+            </div>
+
+            <div class="btnForm">
+                <input class="btn btnPrimary" type="submit" value="J'ai quoi à ces dates ?" />
+            </div>
+
+        </form>
+    </div>
+
 
     <br/>
 

@@ -34,7 +34,7 @@ public class Reservierung {
     private Date dateFin;
 
     @Column(name = "prix")
-    private int prix;
+    private double prix;
 
 
     @Override
@@ -52,7 +52,7 @@ public class Reservierung {
     public Reservierung() {
     }
 
-    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, Date dateFin, int prix) {
+    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, Date dateFin, double prix) {
         this.benutzerId = benutzerId;
         this.fahrzeugId = fahrzeugId;
         this.fahrzeugType = fahrzeugType;
@@ -86,7 +86,7 @@ public class Reservierung {
         return dateFin;
     }
 
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -115,7 +115,7 @@ public class Reservierung {
         this.dateFin = dateFin;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 

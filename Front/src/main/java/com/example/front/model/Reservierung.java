@@ -17,7 +17,7 @@ public class Reservierung {
     private Date dateDebut;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateFin;
-    private int prix;
+    private double prix;
 
     @Override
     public String toString() {
@@ -34,7 +34,7 @@ public class Reservierung {
     public Reservierung() {
     }
 
-    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, Date dateFin, int prix) {
+    public Reservierung(int benutzerId, int fahrzeugId, String fahrzeugType, Date dateDebut, Date dateFin, double prix) {
         this.benutzerId = benutzerId;
         this.fahrzeugId = fahrzeugId;
         this.fahrzeugType = fahrzeugType;
@@ -62,7 +62,7 @@ public class Reservierung {
     public Date getDateFin() {
         return dateFin;
     }
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -85,7 +85,7 @@ public class Reservierung {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 

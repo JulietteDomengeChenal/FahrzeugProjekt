@@ -12,10 +12,11 @@ public class Fahrzeug {
     private String modele;
     private String couleur;
     private int prixReservation;
-    private int tarifKm ;
+    private double tarifKm ;
     private int chevauxFiscaux;
     private int cylindree;
     private int volumeChargement;
+    private String image;
 
     public Fahrzeug() {
 
@@ -43,7 +44,7 @@ public class Fahrzeug {
     public int getPrixReservation() {
         return prixReservation;
     }
-    public int getTarifKm() {
+    public double getTarifKm() {
         return tarifKm;
     }
     public int getChevauxFiscaux() {
@@ -54,6 +55,9 @@ public class Fahrzeug {
     }
     public int getVolumeChargement() {
         return volumeChargement;
+    }
+    public String getImage() {
+        return image;
     }
 
     //---------------------------------SETTER----------------------------------------//
@@ -78,7 +82,7 @@ public class Fahrzeug {
     public void setPrixReservation(int prixReservation) {
         this.prixReservation = prixReservation;
     }
-    public void setTarifKm(int tarifKm) {
+    public void setTarifKm(double tarifKm) {
         this.tarifKm = tarifKm;
     }
     public void setChevauxFiscaux(int chevauxFiscaux) {
@@ -90,6 +94,7 @@ public class Fahrzeug {
     public void setVolumeChargement(int volumeChargement) {
         this.volumeChargement = volumeChargement;
     }
-
-
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

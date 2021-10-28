@@ -1,25 +1,118 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root{
-    --colorDark: #333;
-    --colorLight: #CCC;
+    --colorDark: #232527;
+    --colorLight: #EAEBECFF;
     --colorBlue: #56ccb8;
     --colorRed: #c9105a;
 }
 
 /*--------------------------Body-------------------------*/
-.bodyDiv{
-    padding: 150px;
+html, body {
+    margin: 0;
+    min-height: 100%;
+    background: linear-gradient(0deg, rgb(25, 25, 26) 0%, rgb(0, 0, 0) 100%);
 }
 
+/*--------------------------Divs-------------------------*/
+.bodyDiv{
+    padding: 0 10%;
+    margin-top: 70px;
+}
+.bodyDivRecap{
+    padding: 0 10%;
+    margin-top: 40px;
+}
+.bodyDivRow{
+    padding: 0 10%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 180px;
+}
+.divGauche{
+    width: 50%;
+}
+.divDroite{
+    width: 50%;
+}
+.divGauche35{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+}
+.divDroite65{
+    width: 65%;
+}
+.marginXS{
+    margin-bottom: 5px;
+}
+.marginS{
+    margin-bottom: 20px;
+}
+.marginM{
+    margin-bottom: 50px;
+}
+.marginL{
+    margin-bottom: 80px;
+}
+.divForm{
+    display: flex;
+    justify-content: center;
+}
+form{
+    background-color: #232527;
+    padding: 40px;
+    width: 50%;
+}
+.divRecherche{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.divCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.divCard{
+    margin-bottom: 40px;
+    width: 50%;
+    background-color: var(--colorDark);
+    padding:40px 40px 30px 40px;
+}
+.divRecap{
+    width: 70%;
+    display:flex;
+    flex-direction: row;
+}
+.divInfos{
+    display:flex;
+    flex-direction: row;
+}
 /*--------------------------Text-------------------------*/
 body{
     font-family: Roboto, sans-serif;
+    color: var(--colorLight);
 }
-h1 {
-    color: var(--colorBlue);
+h3 {
+    font-size: 18px;
+    font-weight: 300;
 }
-h2 {
-    color: var(--colorRed);
+h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+.alignCenter{
+    text-align: center;
+}
+.italique{
+    font-style: italic;
+}
+.titre{
+    margin-left:30px;
+}
+p, span, label{
+    font-size: 14px;
 }
 
 /*------------------------Table-------------------------*/
@@ -40,18 +133,85 @@ table th, table td {
 }
 
 /*-----------------------NavBar--------------------------*/
-.navBarDiv{
-    padding: 20px;
-    background-color: var(--colorDark);
+.navBarMenu{
+    padding: 0 10%;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(232,234,236,1) 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 140px;
 }
-.navBarDiv ul li a{
-    margin-right: 20px;
-    color: var(--colorLight);
-    text-decoration: none;
+.navBarMenu ul li a{
+     margin-right: 20px;
+     color: var(--colorDark);
+     text-decoration: none;
+ }
+.logo{
+    background-color: var(--colorDark);
+    width: 20%;
+    text-align: center;
+    padding: 50px 0;
+    position: relative;
+    margin: -140px 0 0 10%;
+}
+.logo img{
+    width: 50%;
 }
 ul {
     list-style-type: none;
 }
 li {
     display: inline;
+}
+
+/*-----------------------Images--------------------------*/
+.imgAccueil{
+    width: 100%;
+}
+.imageVoiture{
+    width:80px;
+}
+.imgCard{
+    width:300px;
+}
+.imgRecap{
+    width:500px;
+}
+
+/*-----------------------Button--------------------------*/
+.btnPrimary{
+    background-color: var(--colorLight);
+    color: var(--colorDark);
+    padding: 8px 20px;
+}
+.btnForm{
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+/*------------------------Form---------------------------*/
+.form-control {
+    color: var(--colorLight);
+    background-color: var(--colorDark);
+    border: 2px solid #626c75;
+}
+.form-control:focus {
+    color: var(--colorLight);
+    background-color: #4e4c4c;
+    border-color: var(--colorLight);
+    box-shadow: 0 0 0 0.25rem rgb(25, 25, 26);
+}
+.form-control:active {
+    color: var(--colorLight);
+    background-color: #4e4c4c;
+    border-color: var(--colorLight);
+    box-shadow: 0 0 0 0.25rem rgb(25, 25, 26);
+}
+
+.form70{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -30,7 +30,7 @@ public class Fahrzeug {
     private int prixReservation;
 
     @Column(name = "tarifKm")
-    private int tarifKm;
+    private double tarifKm;
 
     @Column(name = "chevauxFiscaux")
     private int chevauxFiscaux;
@@ -40,6 +40,10 @@ public class Fahrzeug {
 
     @Column(name = "volumeChargement")
     private int volumeChargement;
+
+    @Column(name = "image")
+    private String image;
+
 
     public Fahrzeug() {
 
@@ -101,11 +105,11 @@ public class Fahrzeug {
         this.prixReservation = prixReservation;
     }
 
-    public int getTarifKm() {
+    public double getTarifKm() {
         return tarifKm;
     }
 
-    public void setTarifKm(int tarifKm) {
+    public void setTarifKm(double tarifKm) {
         this.tarifKm = tarifKm;
     }
 
@@ -131,5 +135,13 @@ public class Fahrzeug {
 
     public void setVolumeChargement(int volumeChargement) {
         this.volumeChargement = volumeChargement;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

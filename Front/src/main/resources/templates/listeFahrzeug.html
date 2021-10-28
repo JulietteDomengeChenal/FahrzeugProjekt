@@ -3,49 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste Fahrzeg</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="navBarDiv" th:insert="~{fragments/my-template :: my-navBar}"></div>
-
+<div class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 <div class="bodyDiv">
 
-    <h1>Liste Fahrzeug</h1>
+    <h2 class="marginM alignCenter">Liste des véhicules disponibles</h2>
 
-    <h2 th:utext = "${reservierungForm.nombreKm}">...</h2>
+    <div class="divCards">
 
-    <div>
-        <table style="border: 1px solid #333">
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Immatriculation</th>
-                <th>Marque</th>
-                <th>Modele</th>
-                <th>Couleur</th>
-                <th>prix de Réservation</th>
-                <th>tarif Km</th>
-                <th>Cylindree</th>
-                <th>Volume Chargement</th>
-                <th>/</th>
-            </tr>
-            <tr th:each ="fahrzeug : ${selectedFahrzeug}">
-                <td th:utext="${fahrzeug.id}">...</td>
-                <td th:utext="${fahrzeug.type}">...</td>
-                <td th:utext="${fahrzeug.immatriculation}">...</td>
-                <td th:utext="${fahrzeug.marque}">...</td>
-                <td th:utext="${fahrzeug.modele }">...</td>
-                <td th:utext="${fahrzeug.couleur}">...</td>
-                <td th:utext="${fahrzeug.prixReservation}">...</td>
-                <td th:utext="${fahrzeug.tarifKm}">...</td>
-                <td th:utext="${fahrzeug.cylindree}">...</td>
-                <td th:utext="${fahrzeug.volumeChargement}">...</td>
-                <td><a th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > Select</a></td>
-<!--                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>-->
-            </tr>
-        </table>
+        <div th:each="fahrzeug : ${selectedFahrzeug}" class="divCard">
+            <div class="divInfos">
+                <div class="divGauche">
+                    <h4 class="marginXS" th:utext="${fahrzeug.marque} + ' ' + ${fahrzeug.modele }">...</h4>
+                    <p class="italique marginS" th:utext="${fahrzeug.couleur}">...</p>
+                    <span class="marginXS">Prix de reservation : </span> <strong th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
+                    <br>
+                    <span class="marginXS">Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
+                    <p th:utext="${fahrzeug.cylindree}" th:if="${fahrzeug.cylindree} != 0">...</p>
+                    <p th:utext="${fahrzeug.volumeChargement}" th:if="${fahrzeug.volumeChargement} != 0">...</p>
+                </div>
+                <div class="divDroite alignCenter">
+                    <img class="imgCard" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele }">
+                </div>
+            </div>
+            <div class="btnForm">
+                <a class="btn btnPrimary" th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > VROOOOUM </a>
+            </div>
+        </div>
+    </div>
+<!--    <div>-->
+<!--        <table style="border: 1px solid #333">-->
+<!--            <tr>-->
+<!--                <th>Id</th>-->
+<!--                <th>Type</th>-->
+<!--                <th>Immatriculation</th>-->
+<!--                <th>Marque</th>-->
+<!--                <th>Modele</th>-->
+<!--                <th>Couleur</th>-->
+<!--                <th>prix de Réservation</th>-->
+<!--                <th>tarif Km</th>-->
+<!--                <th>Cylindree</th>-->
+<!--                <th>Volume Chargement</th>-->
+<!--                <th>Image</th>-->
+<!--                <th>/</th>-->
+<!--            </tr>-->
+<!--            <tr th:each ="fahrzeug : ${selectedFahrzeug}">-->
+<!--                <td th:utext="${fahrzeug.id}">...</td>-->
+<!--                <td th:utext="${fahrzeug.type}">...</td>-->
+<!--                <td th:utext="${fahrzeug.immatriculation}">...</td>-->
+<!--                <td th:utext="${fahrzeug.marque}">...</td>-->
+<!--                <td th:utext="${fahrzeug.modele }">...</td>-->
+<!--                <td th:utext="${fahrzeug.couleur}">...</td>-->
+<!--                <td th:utext="${fahrzeug.prixReservation}">...</td>-->
+<!--                <td th:utext="${fahrzeug.tarifKm}">...</td>-->
+<!--                <td th:utext="${fahrzeug.cylindree}">...</td>-->
+<!--                <td th:utext="${fahrzeug.volumeChargement}">...</td>-->
+<!--                <td>-->
+<!--                    <img th:src="${fahrzeug.image}" alt="bhubh">-->
+<!--                </td>-->
+<!--                <td><a th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > Select</a></td>-->
+<!--&lt;!&ndash;                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>&ndash;&gt;-->
+<!--            </tr>-->
+<!--        </table>-->
     </div>
 
 </div>

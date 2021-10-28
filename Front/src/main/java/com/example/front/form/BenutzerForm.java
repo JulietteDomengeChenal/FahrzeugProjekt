@@ -14,7 +14,7 @@ public class BenutzerForm {
     private Date dateNaissance;
     private int numeroPermis;
     private int anneeObtention;
-    private int prix;
+    private double prix;
     private String fahrzeugType;
 
 
@@ -41,7 +41,7 @@ public class BenutzerForm {
     public int getAnneeObtention() {
         return anneeObtention;
     }
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
     public String getFahrzeugType() {
@@ -67,7 +67,7 @@ public class BenutzerForm {
     public void setAnneeObtention(int anneeObtention) {
         this.anneeObtention = anneeObtention;
     }
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
     public void setFahrzeugType(String fahrzeugType) {

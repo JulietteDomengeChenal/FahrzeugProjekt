@@ -91,7 +91,7 @@ public class MainController {
 
     @RequestMapping(value = { "/reservierung/{id}" }, method = RequestMethod.GET)
     public String selectedFahrzeug(Model model, @PathVariable int id) {
-        int prix = 0;
+        double prix = 0;
         String fahrzeugType = null;
         Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
         for (Fahrzeug fahrzeug : fahrzeugs) {
