@@ -27,6 +27,13 @@ html, body {
     flex-direction: row;
     margin-top: 100px;
 }
+.bodyDivLogin{
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
 .bodyDivConfirmation{
     padding: 0 10%;
     display: flex;
@@ -66,9 +73,11 @@ html, body {
     justify-content: center;
 }
 form{
-    background-color: #232527;
     padding: 40px;
     width: 50%;
+}
+.formColor{
+    background-color: #232527;
 }
 .divRecherche{
     display:flex;
@@ -86,6 +95,12 @@ form{
     background-color: var(--colorDark);
     padding:40px 40px 30px 40px;
 }
+.divCardResa{
+    margin-bottom: 40px;
+    width: 80%;
+    background-color: var(--colorDark);
+    padding:20px 40px;
+}
 .divRecap{
     width: 70%;
     display:flex;
@@ -94,6 +109,16 @@ form{
 .divInfos{
     display:flex;
     flex-direction: row;
+}
+.divInfosRecap{
+    width: 80%;
+    padding: 30px 10%;
+}
+.divMonCompte{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .form-control.divTransparent{
     color:transparent;
@@ -185,6 +210,9 @@ li {
 }
 .imgCard{
     width:300px;
+}
+.imgCardResa{
+    width:200px;
 }
 .imgRecap{
     width:500px;

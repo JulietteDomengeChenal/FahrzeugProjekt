@@ -13,7 +13,7 @@
 <div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
 
-<div class="bodyDivRecap">
+<div class="bodyDiv">
 
 <!--    <h2 class="marginM">Encore un effort ... et en voiture !! </h2>-->
 
@@ -43,26 +43,26 @@
     <div class="divForm">
         <form th:action="@{/reservierung} + '/' + ${fahrzeug.id}"
               th:object="${benutzerForm}" method="POST" class="form70">
-            <div class="mb-3 col-md-6 input-group-sm">
-                <label class="form-label" for="prenom"> Prénom :</label>
-                <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />
-            </div>
-            <div class="mb-3 col-md-6 ps-3 input-group-sm">
-                <label class="form-label" for="nom"> Nom :</label>
-                <input class="form-control" id="nom" type="text" th:field="*{nom}"/>
-            </div>
-            <div class="mb-3 col-md-6 input-group-sm">
-                <label class="form-label" for="dateNaissance"> Date de naissance : </label>
-                <input class="form-control" id="dateNaissance" type="text" th:field="*{dateNaissance}" />
-            </div>
-            <div class="mb-3 col-md-6 ps-3 input-group-sm">
-                <label class="form-label" for="numeroPermis">Numéro de permis : </label>
-                <input class="form-control" id="numeroPermis" type="text" th:field="*{numeroPermis}" />
-            </div>
-            <div class="mb-3 col-md-6 input-group-sm">
-                <label class="form-label" for="anneeObtention">Année Obtention : </label>
-                <input class="form-control" id="anneeObtention" type="text" th:field="*{anneeObtention}" />
-            </div>
+<!--            <div class="mb-3 col-md-6 input-group-sm">-->
+<!--                <label class="form-label" for="prenom"> Prénom :</label>-->
+<!--                <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />-->
+<!--            </div>-->
+<!--            <div class="mb-3 col-md-6 ps-3 input-group-sm">-->
+<!--                <label class="form-label" for="nom"> Nom :</label>-->
+<!--                <input class="form-control" id="nom" type="text" th:field="*{nom}"/>-->
+<!--            </div>-->
+<!--            <div class="mb-3 col-md-6 input-group-sm">-->
+<!--                <label class="form-label" for="dateNaissance"> Date de naissance : </label>-->
+<!--                <input class="form-control" id="dateNaissance" type="text" th:field="*{dateNaissance}" />-->
+<!--            </div>-->
+<!--            <div class="mb-3 col-md-6 ps-3 input-group-sm">-->
+<!--                <label class="form-label" for="numeroPermis">Numéro de permis : </label>-->
+<!--                <input class="form-control" id="numeroPermis" type="text" th:field="*{numeroPermis}" />-->
+<!--            </div>-->
+<!--            <div class="mb-3 col-md-6 input-group-sm">-->
+<!--                <label class="form-label" for="anneeObtention">Année Obtention : </label>-->
+<!--                <input class="form-control" id="anneeObtention" type="text" th:field="*{anneeObtention}" />-->
+<!--            </div>-->
             <div class="mb-3 col-md-3 input-group-sm">
                 <input class="form-control  divTransparent" type="text" th:field="*{prix}" th:attr = "value = ${prix}"/>
             </div>

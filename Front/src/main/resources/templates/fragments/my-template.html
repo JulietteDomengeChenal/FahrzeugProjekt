@@ -9,7 +9,9 @@
 
     <div>
         <div >
-            <img th:fragment="my-logo" th:src="@{/images/logo.png}" alt="superLogo">
+            <a th:fragment="my-logo" th:href="@{/accueil}">
+                <img th:src="@{/images/logo.png}" alt="superLogo">
+            </a>
         </div>
         <div>
             <ul th:fragment="my-navBar">

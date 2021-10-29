@@ -19,6 +19,12 @@ public class ReservierungController {
         return reservierungRepository.findAll();
     }
 
+    //---------------------------------------Liste des réservations --------------------------------------------------------
+    @GetMapping(value = "/ReservierungbyBenutzer/{benutzerId}")
+    public List<Reservierung> listReservierungbyBenutzer(@PathVariable int benutzerId) {
+        return reservierungRepository.findAllbyBenutzerId(benutzerId);
+    }
+
     //---------------------------------------Afficher une réservation/{id---------------------------------------------------
     @GetMapping(value = "/Reservierung/{id}")
     public Reservierung afficherReservierung(@PathVariable int id) {

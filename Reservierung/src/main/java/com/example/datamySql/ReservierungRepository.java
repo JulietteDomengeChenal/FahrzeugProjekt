@@ -9,6 +9,8 @@ public interface ReservierungRepository extends CrudRepository<Reservierung, Int
 
     List<Reservierung> findAll();
 
+    List<Reservierung> findAllbyBenutzerId(int benutzerId);
+
     Reservierung findById(int id);
 
     Reservierung save(Reservierung reservierung);

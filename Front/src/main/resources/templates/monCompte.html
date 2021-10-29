@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon compte</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div th:if="${currentBenutzer} != null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
+<div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
+
+
+<div class="bodyDiv">
+    <div class="divInfosRecap">
+        <h2 class="marginS" th:utext = "${currentBenutzer.prenom} + ' ' + ${currentBenutzer.nom}"></h2>
+        <p class="marginXS" th:utext = "'Numéro de permis : ' + ${currentBenutzer.numeroPermis}"></p>
+        <p th:utext = "'Date de naissance : ' + ${currentBenutzer.dateNaissance}"></p>
+    </div>
+
+    <div class="divCards">
+
+        <div class="divCardResa" th:each="reservierung : ${selectedReservierungs}">
+            <div class="divMonCompte">
+                <div class="col-md-2">
+                    <img th:each="fahrzeug : ${selectedFahrzeug}" th:if="${fahrzeug.id} == ${reservierung.fahrzeugId}" class="imgCardResa" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele}">
+                </div>
+                <div class="col-md-5">
+                    <h4 class="marginXS" th:utext="'Réservation du ' + ${reservierung.dateDebut} + ' au ' + ${reservierung.dateFin }">...</h4>
+                </div>
+                <div class="col-md-1">
+                    <p class="italique marginXS" th:utext="'Prix : ' + ${reservierung.prix} + ' €'">...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

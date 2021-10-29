@@ -12,10 +12,12 @@
 <div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
     <div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
-    <div class="bodyDivRecap">
+    <div class="bodyDivLogin">
+
+        <h2 class = "marginM">Qui va là ?</h2>
 
             <form th:action="@{/login}"
-                  th:object="${loginForm}" method="POST" class="form70">
+                  th:object="${loginForm}" method="POST" class="form70 formColor">
                 <div class="mb-3 col-md-6 input-group-sm">
                     <label class="form-label" for="prenom"> Prénom :</label>
                     <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />

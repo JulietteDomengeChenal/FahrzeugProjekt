@@ -9,6 +9,7 @@ import com.example.front.model.Benutzer;
 import com.example.front.model.Fahrzeug;
 import com.example.front.model.Reservierung;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,10 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -33,7 +31,7 @@ public class MainController {
     private List<Reservierung> reservierungs;
     private List<Fahrzeug> fahrzeugs;
     private ReservierungForm currentReservierungForm = new ReservierungForm();
-
+    private final static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Benutzer currentBenutzer = new Benutzer();
 
     String urlReservierung = "http://localhost:8087";
@@ -229,9 +227,9 @@ public class MainController {
 
 //        Benutzer benutzer = new Benutzer(benutzerForm.getNom(),benutzerForm.getPrenom(), benutzerbenutzerForm.getDateNaissance(),
 //                benutzerForm.getNumeroPermis(),benutzerForm.getAnneeObtention());
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(currentBenutzer, headers);
-        currentBenutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer",httpEntity,Benutzer.class);
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        HttpEntity<Benutzer> httpEntity = new HttpEntity<>(currentBenutzer, headers);
+//        currentBenutzer = restTemplate.postForObject(urlBenutzer + "/Benutzer",httpEntity,Benutzer.class);
 
         Reservierung reservierung = new Reservierung(currentBenutzer.getId(), id, benutzerForm.getFahrzeugType(),
                 currentReservierungForm.getDateDebut(), currentReservierungForm.getDateFin(), benutzerForm.getPrix());
@@ -242,5 +240,39 @@ public class MainController {
         model.addAttribute("currentBenutzer", currentBenutzer);
         return "confirmation";
     }
+
+//----------------Afficher mon compte-----------------------------------------------------------------------------------
+    @RequestMapping(value = { "/monCompte" }, method = RequestMethod.GET)
+    public String showMonCompte(Model model){
+
+        List<Reservierung> selectedReservierungs= new ArrayList<>();
+        Reservierung[] reservierungs = restTemplate.getForObject( urlReservierung + "/ListeReservierung", Reservierung[].class );
+        List<Fahrzeug> selectedFahrzeug= new ArrayList<>();
+        Fahrzeug[] fahrzeugs = restTemplate.getForObject( urlFahrzeug + "/Fahrzeug", Fahrzeug[].class );
+
+        for (Reservierung reservierung : reservierungs){
+            if(reservierung.getBenutzerId() == currentBenutzer.getId()){
+                selectedReservierungs.add(reservierung);
+            }
+        }
+        for (Reservierung reservierung : selectedReservierungs) {
+            for (Fahrzeug fahrzeug : fahrzeugs) {
+                if (fahrzeug.getId() == reservierung.getFahrzeugId()) {
+                    selectedFahrzeug.add(fahrzeug);
+                }
+            }
+        }
+        model.addAttribute("selectedFahrzeug", selectedFahrzeug);
+        model.addAttribute("selectedReservierungs", selectedReservierungs);
+        model.addAttribute("currentBenutzer", currentBenutzer);
+        return "monCompte";
+    }
+
+    @GetMapping
+    public String main(Model model) throws ParseException {
+        model.addAttribute("exampleDate", sdf.parse("20/06/2020"));
+        return "qqchose";
+    }
+
 
 }
