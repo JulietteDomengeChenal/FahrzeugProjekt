@@ -23,57 +23,25 @@
                 <div class="divGauche">
                     <h4 class="marginXS" th:utext="${fahrzeug.marque} + ' ' + ${fahrzeug.modele }">...</h4>
                     <p class="italique marginXS" th:utext="${fahrzeug.couleur}">...</p>
-                    <p class="italique" th:if="${fahrzeug.cylindree} != 0" th:utext="'Cylindrée : ' + ${fahrzeug.cylindree} + ' cm3'"> </p>
-                    <p class="italique" th:if="${fahrzeug.volumeChargement} != 0" th:utext="'Volume de chargement : ' + ${fahrzeug.volumeChargement} + ' m3'"> </p>
-                    <span class="marginXS">Prix de reservation : </span> <strong th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
+                    <p class="italique" th:if="${fahrzeug.cylindree} != 0"
+                       th:utext="'Cylindrée : ' + ${fahrzeug.cylindree} + ' cm3'"></p>
+                    <p class="italique" th:if="${fahrzeug.volumeChargement} != 0"
+                       th:utext="'Volume de chargement : ' + ${fahrzeug.volumeChargement} + ' m3'"></p>
+                    <span class="marginXS">Prix de reservation : </span> <strong
+                        th:utext="${fahrzeug.prixReservation} + ' €'"></strong>
                     <br>
-                    <span class="marginXS">Tarif kilométrique : </span> <strong th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
+                    <span class="marginXS">Tarif kilométrique : </span> <strong
+                        th:utext="${fahrzeug.tarifKm} + ' €/km'"></strong>
                 </div>
                 <div class="divDroite alignCenter">
                     <img class="imgCard" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele }">
                 </div>
             </div>
             <div class="btnForm">
-                <a class="btn btnPrimary" th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > VROOOOUM </a>
+                <a class="btn btnPrimary" th:href="@{/reservierung} +'/' + ${fahrzeug.id}"> VROOOOUM </a>
             </div>
         </div>
     </div>
-<!--    <div>-->
-<!--        <table style="border: 1px solid #333">-->
-<!--            <tr>-->
-<!--                <th>Id</th>-->
-<!--                <th>Type</th>-->
-<!--                <th>Immatriculation</th>-->
-<!--                <th>Marque</th>-->
-<!--                <th>Modele</th>-->
-<!--                <th>Couleur</th>-->
-<!--                <th>prix de Réservation</th>-->
-<!--                <th>tarif Km</th>-->
-<!--                <th>Cylindree</th>-->
-<!--                <th>Volume Chargement</th>-->
-<!--                <th>Image</th>-->
-<!--                <th>/</th>-->
-<!--            </tr>-->
-<!--            <tr th:each ="fahrzeug : ${selectedFahrzeug}">-->
-<!--                <td th:utext="${fahrzeug.id}">...</td>-->
-<!--                <td th:utext="${fahrzeug.type}">...</td>-->
-<!--                <td th:utext="${fahrzeug.immatriculation}">...</td>-->
-<!--                <td th:utext="${fahrzeug.marque}">...</td>-->
-<!--                <td th:utext="${fahrzeug.modele }">...</td>-->
-<!--                <td th:utext="${fahrzeug.couleur}">...</td>-->
-<!--                <td th:utext="${fahrzeug.prixReservation}">...</td>-->
-<!--                <td th:utext="${fahrzeug.tarifKm}">...</td>-->
-<!--                <td th:utext="${fahrzeug.cylindree}">...</td>-->
-<!--                <td th:utext="${fahrzeug.volumeChargement}">...</td>-->
-<!--                <td>-->
-<!--                    <img th:src="${fahrzeug.image}" alt="bhubh">-->
-<!--                </td>-->
-<!--                <td><a th:href="@{/reservierung} +'/' + ${fahrzeug.id}" > Select</a></td>-->
-<!--&lt;!&ndash;                <td><a th:href="@{/deletePersonnage} + '/' + ${reservierung.id}">Delete</a></td>&ndash;&gt;-->
-<!--            </tr>-->
-<!--        </table>-->
-    </div>
-
 </div>
 
 </body>

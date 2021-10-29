@@ -28,9 +28,6 @@
                 <div class="col-md-2">
                     <img th:each="fahrzeug : ${selectedFahrzeug}" th:if="${fahrzeug.id} == ${reservierung.fahrzeugId}" class="imgCardResa" th:src="${fahrzeug.image}" th:alt="${fahrzeug.modele}">
                 </div>
-<!--                <div class="col-md-5">-->
-<!--                    <h4 class="marginXS" th:utext="'Réservation du ' + ${reservierung.dateDebut} + ' au ' + ${reservierung.dateFin }">...</h4>-->
-<!--                </div>-->
 
                 <div class="col-md-5">
                     <h4 class="marginXS" th:utext="'Réservation du ' + ${#calendars.format(reservierung.dateDebut, 'yyyy-MM-dd')}

@@ -10,34 +10,33 @@
 
 <div th:if="${currentBenutzer} != null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBar}"></div>
 <div th:if="${currentBenutzer} == null" class="navBarMenu" th:insert="~{fragments/my-template :: my-navBarOut}"></div>
-    <div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
+<div class="logo" th:insert="~{fragments/my-template :: my-logo}"></div>
 
-    <div class="bodyDivLogin">
+<div class="bodyDivLogin">
 
-        <h2 class = "marginM">Qui va là ?</h2>
+    <h2 class="marginM">Qui va là ?</h2>
 
-            <form th:action="@{/login}"
-                  th:object="${loginForm}" method="POST" class="form70 formColor">
-                <div class="mb-3 col-md-6 input-group-sm">
-                    <label class="form-label" for="prenom"> Prénom :</label>
-                    <input class="form-control" id="prenom" type="text" th:field="*{prenom}" />
-                </div>
-                <div class="mb-3 col-md-6 ps-3 input-group-sm">
-                    <label class="form-label" for="nom"> Nom :</label>
-                    <input class="form-control" id="nom" type="text" th:field="*{nom}"/>
-                </div>
-                <div class="mb-3 col-md-6 input-group-sm">
-                    <label class="form-label" for="dateNaissance"> Mot de passe : </label>
-                    <input class="form-control" id="dateNaissance" type="text" th:field="*{motDePasse}" />
-                </div>
+    <form th:action="@{/login}"
+          th:object="${loginForm}" method="POST" class="form70 formColor">
+        <div class="mb-3 col-md-6 input-group-sm">
+            <label class="form-label" for="prenom"> Prénom :</label>
+            <input class="form-control" id="prenom" type="text" th:field="*{prenom}"/>
+        </div>
+        <div class="mb-3 col-md-6 ps-3 input-group-sm">
+            <label class="form-label" for="nom"> Nom :</label>
+            <input class="form-control" id="nom" type="text" th:field="*{nom}"/>
+        </div>
+        <div class="mb-3 col-md-6 input-group-sm">
+            <label class="form-label" for="dateNaissance"> Mot de passe : </label>
+            <input class="form-control" id="dateNaissance" type="text" th:field="*{motDePasse}"/>
+        </div>
 
-                <div class="btnForm col-md-12">
-                    <input class="btn btnPrimary" type="submit" value="En voiture Simone !" />
-                </div>
+        <div class="btnForm col-md-12">
+            <input class="btn btnPrimary" type="submit" value="En voiture Simone !"/>
+        </div>
 
-            </form>
+    </form>
 
-
-    </div>
+</div>
 </body>
 </html>

@@ -12,6 +12,17 @@ html, body {
     min-height: 100vh;
     background: linear-gradient(0deg, rgb(25, 25, 26) 0%, rgb(0, 0, 0) 100%);
 }
+ul{
+    display: contents;
+}
+li {
+    padding-bottom: 10px;
+}
+.classADalas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /*--------------------------Divs-------------------------*/
 .bodyDiv{
@@ -179,10 +190,12 @@ table th, table td {
     height: 100px;
 }
 .navBarMenu ul li a{
-     margin-right: 20px;
      color: var(--colorDark);
      text-decoration: none;
  }
+.navBarMenu ul li {
+    margin-right: 20px;
+}
 .logo{
     background-color: #000000;
     width: 20%;
@@ -204,6 +217,12 @@ li {
 /*-----------------------Images--------------------------*/
 .imgAccueil{
     width: 100%;
+}
+.imgLogout{
+    width: 20px;
+}
+.imgProfile{
+    width: 30px;
 }
 .imageVoiture{
     width:80px;

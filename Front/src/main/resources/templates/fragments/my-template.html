@@ -7,34 +7,39 @@
 </head>
 <body>
 
+<div>
     <div>
-        <div >
-            <a th:fragment="my-logo" th:href="@{/accueil}">
-                <img th:src="@{/images/logo.png}" alt="superLogo">
-            </a>
-        </div>
-        <div>
-            <ul th:fragment="my-navBar">
-                <li><a th:href="@{/accueil}">Accueil</a></li>
-                <li><a th:href="@{/recherche}">Recherche</a></li>
-<!--                <li><a th:href="@{/listeFahrzeug}">Véhicules</a></li>-->
-                <li><a  th:href="@{/monCompte}">Mon compte</a></li>
-                <li><a  th:href="@{/login}">Déconnexion</a></li>
-    <!--            <li><a th:href="@{/about}">About</a></li>-->
-            </ul>
-        </div>
-        <div>
-            <ul th:fragment="my-navBarOut">
-                <li><a th:href="@{/accueil}">Accueil</a></li>
-                <li><a th:href="@{/newBenutzer}">M'enregistrer</a></li>
-                <li><a  th:href="@{/login}">Connexion</a></li>
-            </ul>
-        </div>
+        <a th:fragment="my-logo" th:href="@{/accueil}">
+            <img th:src="@{/images/logo.png}" alt="superLogo">
+        </a>
     </div>
-
     <div>
-
+        <ul th:fragment="my-navBar">
+            <li><a th:href="@{/accueil}">Accueil</a></li>
+            <li><a th:href="@{/recherche}">Recherche</a></li>
+<!--            <li><a th:href="@{/monCompte}">Mon compte</a></li>-->
+            <li class="ms-3 classADalas alignCenter">
+                <img th:src="@{/images/profile.png}" alt="profile" class="imgProfile">
+                <a th:href="@{/monCompte}" th:utext="${currentBenutzer.prenom} + ' ' + ${currentBenutzer.nom}">...</a>
+            </li>
+            <li><a style="color: #d9073f" th:href="@{/login}">Déconnexion</a></li>
+<!--            <li>-->
+<!--                <a th:href="@{/login}"><img th:src="@{/images/logout.png}" alt="profile" class="imgLogout"></a>-->
+<!--            </li>-->
+        </ul>
     </div>
+    <div>
+        <ul th:fragment="my-navBarOut">
+            <li><a th:href="@{/accueil}">Accueil</a></li>
+            <li><a th:href="@{/newBenutzer}">M'enregistrer</a></li>
+            <li><a style="color: #56ccb8" th:href="@{/login}">Connexion</a></li>
+        </ul>
+    </div>
+</div>
+
+<div>
+
+</div>
 
 
 </body>
