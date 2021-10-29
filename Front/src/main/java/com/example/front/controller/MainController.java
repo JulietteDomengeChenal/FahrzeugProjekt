@@ -17,6 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.spring5.ISpringTemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.text.*;
 import java.time.LocalDate;
@@ -262,17 +266,13 @@ public class MainController {
                 }
             }
         }
+
         model.addAttribute("selectedFahrzeug", selectedFahrzeug);
         model.addAttribute("selectedReservierungs", selectedReservierungs);
         model.addAttribute("currentBenutzer", currentBenutzer);
         return "monCompte";
     }
 
-    @GetMapping
-    public String main(Model model) throws ParseException {
-        model.addAttribute("exampleDate", sdf.parse("20/06/2020"));
-        return "qqchose";
-    }
 
 
 }
